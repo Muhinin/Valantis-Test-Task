@@ -7,11 +7,8 @@ interface IProductCard {
 }
 
 const ProductCard: React.FC<IProductCard> = ({ product }) => (
-  <Grid item xs={3}>
-    <Paper
-      key={product.id}
-      sx={{ padding: "8px", textAlign: "left", minHeight: 130 }}
-    >
+  <Grid item xs={3} key={product.id}>
+    <Paper sx={{ padding: "8px", textAlign: "left", minHeight: 130 }}>
       <Typography sx={{ fontSize: 10, color: "gray" }}>
         Id: {product.id}
       </Typography>
