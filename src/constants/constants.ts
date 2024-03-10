@@ -1,4 +1,4 @@
-export const url = "http://api.valantis.store:40000/";
+export const url = "https://api.valantis.store:41000/";
 export const apiPassword = "Valantis";
 export const maxRequestCount = 10;
 export const productsPerPage = 50;
