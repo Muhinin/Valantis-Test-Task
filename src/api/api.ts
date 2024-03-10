@@ -1,7 +1,7 @@
 import { maxRequestCount, url } from "../constants/constants";
 import { getHeaders } from "../utils/utils";
 
-export async function fetchData(action: string, params: unknown) {
+export async function fetchData(action: string, params?: unknown) {
   let attemptsCount = 0;
   const request = () => {
     attemptsCount++;
