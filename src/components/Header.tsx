@@ -12,7 +12,7 @@ import { Dispatch, SetStateAction } from "react";
 interface IHeader {
   filterOptions?: Record<string, string[]>;
   setActiveFilter: Dispatch<
-    SetStateAction<Record<string, string | undefined> | undefined>
+    SetStateAction<Record<string, string | undefined>>
   >;
 }
 
@@ -25,23 +25,23 @@ const Header: React.FC<IHeader> = ({ filterOptions, setActiveFilter }) => {
   };
 
   return (
-    <Box position="fixed" top={0} width={"100vw"} sx={{ bgcolor: "white" }}>
+    <Box position="fixed" top={0} width="100vw" sx={{ bgcolor: "white" }}>
       <Box maxWidth="1200px" margin="0 auto">
         <Box
-          display={"flex"}
-          alignItems={"center"}
-          gap={"16px"}
-          padding={"8px 0"}
+          display="flex"
+          alignItems="center"
+          gap="16px"
+          padding="8px 0"
         >
           <Avatar src={ValantisImage} sx={{ width: 64, height: 64 }} />
           <Typography variant="h4">Valantis Jewelry</Typography>
         </Box>
         <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"flex-end"}
-          gap={"16px"}
-          padding={"8px"}
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+          gap="16px"
+          padding="8px"
         >
           <Typography>Фильтры</Typography>
           {filterOptions ? (

@@ -6,14 +6,16 @@ import ProductCard from "./components/ProductCard";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
 import { productsPerPage } from "./constants/constants";
+import { hasKeysInObject } from "./utils/utils";
 
 function App() {
   const [data, setData] = useState<productType[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [count, setCount] = useState<number>();
-  const [activeFilter, setActiveFilter] =
-    useState<Record<string, string | undefined>>();
+  const [activeFilter, setActiveFilter] = useState<
+    Record<string, string | undefined>
+  >({});
   const [filterOptions, setFilterOptions] =
     useState<Record<string, string[]>>();
 
@@ -22,7 +24,9 @@ function App() {
   };
 
   const updateCountOfPages = (countOfProducts: number | undefined) =>
-    setCount(countOfProducts ? Math.ceil(countOfProducts / productsPerPage) : 0);
+    setCount(
+      countOfProducts ? Math.ceil(countOfProducts / productsPerPage) : 0
+    );
 
   const getProducts = (action: apiActions) => {
     setIsLoading(true);
@@ -38,7 +42,6 @@ function App() {
           }
     )
       .then((ids: { result: string[] }) => {
-        updateCountOfPages(ids.result?.length);
         fetchData(apiActions.GET_ITEMS, {
           ids: Array.from(new Set(ids.result)),
         }).then((items: { result: productType[] }) => {
@@ -75,12 +78,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getProducts(apiActions.GET_IDS);
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (activeFilter) getProducts(apiActions.FILTER);
-  }, [activeFilter]);
+    getProducts(
+      hasKeysInObject(activeFilter) ? apiActions.FILTER : apiActions.GET_IDS
+    );
+  }, [activeFilter, currentPage]);
 
   return (
     <>
@@ -92,7 +93,7 @@ function App() {
         margin="16px auto"
         marginTop="168px"
         gap="16px"
-        alignItems={"center"}
+        alignItems="center"
       >
         <Grid container spacing={2}>
           {isLoading ? (
@@ -104,7 +105,7 @@ function App() {
             ))
           )}
         </Grid>
-        {!isLoading && currentPage > 0 && (
+        {!isLoading && !hasKeysInObject(activeFilter) && (
           <Pagination
             count={count}
             page={currentPage}

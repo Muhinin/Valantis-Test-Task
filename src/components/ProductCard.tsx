@@ -16,7 +16,7 @@ const ProductCard: React.FC<IProductCard> = ({ product }) => (
       <Typography sx={{ color: "grey" }}>
         Бренд: {product.brand || "Не указан"}
       </Typography>
-      <Box display={"flex"} width={"100%"} justifyContent={"flex-end"}>
+      <Box display="flex" width="100%" justifyContent="flex-end">
         <Typography sx={{ fontWeight: 600, color: "darkred" }}>
           Цена: {product.price}
         </Typography>
